@@ -5,8 +5,10 @@
 
 Mysql for setting up:
 
-```SQL
+
 First create schema name it adg_car_rental.code:
+
+```SQL
 USE adg_car_rental;
 CREATE TABLE adg_card_details (
     cardid     INT NOT NULL,
