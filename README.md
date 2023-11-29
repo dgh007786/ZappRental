@@ -5,6 +5,7 @@
 
 Mysql for setting up:
 
+```SQL
 First create schema name it adg_car_rental.code:
 USE adg_car_rental;
 CREATE TABLE adg_card_details (
@@ -149,6 +150,7 @@ ALTER TABLE adg_invoice ADD CONSTRAINT rentalservice_fk FOREIGN KEY (rentalid) R
 ALTER TABLE adg_rentalservice ADD CONSTRAINT vehicle_fk FOREIGN KEY (vin) REFERENCES adg_vehicle (vin);
 ALTER TABLE adg_vehicle ADD CONSTRAINT vehicleclass_fk FOREIGN KEY (classid) REFERENCES adg_vehicleclass (classid);
 ALTER TABLE adg_vehicle ADD CONSTRAINT vehiclestatus_fk FOREIGN KEY (statusid) REFERENCES adg_vehiclestatus (statusid);
+```
 
 If you encounter error 1558:
 Solution
