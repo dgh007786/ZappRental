@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <!-- Add your CSS links here -->
+</head>
+<body>
+
+<form action="signup.php" method="post">
+    <h2>Sign Up</h2>
+    <label for="emailid">Email:</label>
+    <input type="email" name="emailid" id="emailid" required>
+
+    <label for="phonenumber">Phone Number:</label>
+    <input type="text" name="phonenumber" id="phonenumber" required>
+
+    <label for="cust_fname">First Name:</label>
+    <input type="text" name="cust_fname" id="cust_fname" required>
+
+    <label for="cust_lname">Last Name:</label>
+    <input type="text" name="cust_lname" id="cust_lname" required>
+
+    <label for="custcity">City:</label>
+    <input type="text" name="custcity" id="custcity" required>
+
+    <label for="custstate">State:</label>
+    <input type="text" name="custstate" id="custstate" required>
+
+    <label for="custst">Street:</label>
+    <input type="text" name="custst" id="custst" required>
+
+    <label for="custzipcode">Zip Code:</label>
+    <input type="text" name="custzipcode" id="custzipcode" required>
+
+    <label for="custcountry">Country:</label>
+    <input type="text" name="custcountry" id="custcountry" required>
+
+    <label for="cust_type">Customer Type:</label>
+    <select name="cust_type" id="cust_type" required>
+        <option value="">Select Type</option>
+        <option value="C">Customer</option>
+        <option value="I">Individual</option>
+    </select>
+
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required>
+
+    <input type="submit" value="Sign Up">
+</form>
+
+<p>Already have an account? <a href="login.html">Log in here</a>.</p>
+
+<script>
+    // Example JavaScript to redirect user if they are already signed up
+    // This part should be adapted based on your actual login check logic
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+        var username = document.getElementById('username').value;
+        // Here, you would check if the user is already signed up, perhaps via an AJAX call to your server
+        // For demonstration, let's assume a function `isUserSignedUp(username)` returns true if the user exists
+        if (isUserSignedUp(username)) {
+            event.preventDefault(); // Stop form submission
+            window.location.href = 'login.html'; // Redirect to login page
+        }
+    });
+    
+    function isUserSignedUp(username) {
+        // Placeholder for actual sign-up check logic
+        return false; // This should be replaced with actual check
+    }
+    </script>
+
+
+</body>
+</html>

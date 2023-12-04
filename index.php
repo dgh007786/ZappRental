@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+$userLoggedIn = isset($_SESSION['username']);
+$username = $userLoggedIn ? htmlspecialchars($_SESSION['username']) : '';
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -20,11 +29,12 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   </head>
 
   <body>
-    <?php include 'db_connection.php'; ?>
+
     <div class="site-wrap" id="home-section">
 
       <div class="site-mobile-menu site-navbar-target">
@@ -61,6 +71,13 @@
                   <li><a href="blog.html" class="nav-link">Blog</a></li> -->
                   <li><a href="about.html" class="nav-link">About</a></li>
                   <li><a href="contact.html" class="nav-link">Contact</a></li>
+                  <li>
+                  <?php if ($userLoggedIn): ?>
+                      <a href="account.php" class="nav-link"><?php echo $username; ?><i class="fa fa-angle-down"></i></a><small><a href="logout.php" class="nav-link">Log Out</a></small>
+                  <?php else: ?>
+                      <a href="signup.html" class="nav-link">Sign Up/Login</a>
+                  <?php endif; ?>
+                  </li>
                 </ul>
               </nav>
             </div>

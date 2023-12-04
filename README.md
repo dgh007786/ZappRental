@@ -152,6 +152,33 @@ ALTER TABLE adg_invoice ADD CONSTRAINT rentalservice_fk FOREIGN KEY (rentalid) R
 ALTER TABLE adg_rentalservice ADD CONSTRAINT vehicle_fk FOREIGN KEY (vin) REFERENCES adg_vehicle (vin);
 ALTER TABLE adg_vehicle ADD CONSTRAINT vehicleclass_fk FOREIGN KEY (classid) REFERENCES adg_vehicleclass (classid);
 ALTER TABLE adg_vehicle ADD CONSTRAINT vehiclestatus_fk FOREIGN KEY (statusid) REFERENCES adg_vehiclestatus (statusid);
+
+ALTER TABLE adg_customer
+ADD COLUMN username VARCHAR(50) NOT NULL,
+ADD COLUMN password VARCHAR(255) NOT NULL;
+
+ALTER TABLE adg_corporate DROP FOREIGN KEY customer_fkv3;
+ALTER TABLE adg_discountcoupon DROP FOREIGN KEY customer_fk;
+ALTER TABLE adg_individual DROP FOREIGN KEY customer_fkv1;
+ALTER TABLE adg_rentalservice DROP FOREIGN KEY customer_fkv2;
+
+ALTER TABLE adg_customer MODIFY custid INT NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE adg_corporate
+ADD CONSTRAINT customer_fkv3 FOREIGN KEY (custid) REFERENCES adg_customer(custid);
+
+ALTER TABLE adg_discountcoupon
+ADD CONSTRAINT customer_fk FOREIGN KEY (custid) REFERENCES adg_customer(custid);
+
+ALTER TABLE adg_individual
+ADD CONSTRAINT customer_fkv1 FOREIGN KEY (custid) REFERENCES adg_customer(custid);
+
+ALTER TABLE adg_rentalservice
+ADD CONSTRAINT customer_fkv2 FOREIGN KEY (custid) REFERENCES adg_customer(custid);
+
+ALTER TABLE adg_customer
+MODIFY phonenumber VARCHAR(20) NOT NULL;
+
 ```
 
 If you encounter error 1558:
