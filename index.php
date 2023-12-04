@@ -24,8 +24,7 @@
   </head>
 
   <body>
-
-    
+    <?php include 'db_connection.php'; ?>
     <div class="site-wrap" id="home-section">
 
       <div class="site-mobile-menu site-navbar-target">
