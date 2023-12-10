@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'db_connection.php'; // Your database connection file
+include 'db_connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve and sanitize user input
