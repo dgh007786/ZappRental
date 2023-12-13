@@ -1,9 +1,13 @@
 <?php
-include 'db_connection.php'; 
-$sql = "SELECT * FROM ADG_Vehicle";
+session_start();
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+include 'db_connection.php';
+$sql = "SELECT DISTINCT vehiclemake, vehiclemodel, vehicleyear FROM ADG_Vehicle";
 $result = $conn->query($sql);
+$userLoggedIn = isset($_SESSION['username']);
+$username = $userLoggedIn ? htmlspecialchars($_SESSION['username']) : '';
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -23,6 +27,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -52,7 +57,7 @@ $result = $conn->query($sql);
 
             <div class="col-3">
               <div class="site-logo">
-                <a href="index.html"><strong>CarRental</strong></a>
+                <a href="index.php"><strong>ZappRental</strong></a>
               </div>
             </div>
 
@@ -61,13 +66,20 @@ $result = $conn->query($sql);
               <span class="d-inline-block d-lg-none"><a href="#" class=" site-menu-toggle js-menu-toggle py-5 "><span class="icon-menu h3 text-black"></span></a></span>
 
               <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
-                <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                  <li><a href="index.html" class="nav-link">Home</a></li>
-                  <li class="active"><a href="listing.html" class="nav-link">Listing</a></li>
+                <ul class="site-menu main-menu js-clone-nav ml-auto">
+                  <li class="active"><a href="index.php" class="nav-link">Home</a></li>
+                  <li><a href="listing.php" class="nav-link">Listing</a></li>
                   <!-- <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
                   <li><a href="blog.html" class="nav-link">Blog</a></li> -->
-                  <li><a href="about.html" class="nav-link">About</a></li>
-                  <li><a href="contact.html" class="nav-link">Contact</a></li>
+                  <li><a href="about.php" class="nav-link">About</a></li>
+                  <li><a href="contact.php" class="nav-link">Contact</a></li>
+                  <li>
+                  <?php if ($userLoggedIn): ?>
+                      <a href="account.php" class="nav-link"><?php echo $username; ?><i class="fa fa-angle-down"></i></a><small><a href="logout.php" class="nav-link">Log Out</a></small>
+                  <?php else: ?>
+                      <a href="signup.php" class="nav-link">Sign Up/Login</a>
+                  <?php endif; ?>
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -87,7 +99,7 @@ $result = $conn->query($sql);
 
               <div class="intro">
                 <h1><strong>Listings</strong></h1>
-                <div class="custom-breadcrumbs"><a href="index.html">Home</a> <span class="mx-2">/</span> <strong>Listings</strong></div>
+                <div class="custom-breadcrumbs"><a href="index.php">Home</a> <span class="mx-2">/</span> <strong>Listings</strong></div>
               </div>
 
             </div>
@@ -95,23 +107,23 @@ $result = $conn->query($sql);
         </div>
       </div>
   
-      
+
+
+
       <div class="site-section bg-light">
         <div class="container">
           <div class="row">
             <?php
             if ($result->num_rows > 0) {
-                // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    $imagePath = "images/cars/" . urlencode($row["VehicleModel"]) . ".png";
+                  $imageFileName = $row["vehiclemake"] . " " . $row["vehiclemodel"]; 
+                  $imagePath = "images/car/" . $imageFileName . ".png";
                     echo "<div class='col-md-6 col-lg-4 mb-4'>";
                     echo "<div class='listing d-block align-items-stretch'>";
-                    // echo "<div class='listing-img h-100 mr-4'><img src='" . $imagePath . "' alt='" . $row["VehicleModel"] . "' class='img-fluid'></div>";
+                    echo "<div class='listing-img h-100 mr-4'><img src='" . $imagePath . "' alt='" . $row["vehiclemodel"] . "' class='img-fluid'></div>";
                     echo "<div class='listing-contents h-100'>";
-                    echo "<h3>" . $row["VehicleMake"] . " " . $row["VehicleModel"] . "</h3>";
-                    echo "<p><strong>Year:</strong> " . $row["VehicleYear"] . "</p>";
-                    echo "<p><strong>License Plate:</strong> " . $row["LicensePlate"] . "</p>";
-                    echo "<p><strong>VIN:</strong> " . $row["VIN"] . "</p>";
+                    echo "<h3>" . $row["vehiclemake"] . " " . $row["vehiclemodel"] . "</h3>";
+                    echo "<p><strong>Year:</strong> " . $row["vehicleyear"] . "</p>";
                     echo "<p><a href='#' class='btn btn-primary btn-sm'>Rent Now</a></p>";
                     echo "</div>";
                     echo "</div>";
@@ -124,9 +136,6 @@ $result = $conn->query($sql);
           </div>
         </div>
       </div>
-    
-
-      
 
     
 
@@ -180,3 +189,6 @@ $result = $conn->query($sql);
 
 </html>
 
+<?php
+$conn->close();
+?>

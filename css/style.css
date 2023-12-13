@@ -1761,3 +1761,83 @@ h1, h2, h3, h4, h5,
   .listing p {
     color: #888;
     font-size: 14px; }
+.margintp{
+  margin-top: 12vh;
+  background-image: url(../images/hero_1_a.jpg);
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.wideinput{
+  width: 60vw;
+}
+.margintop{
+  margin-top: 15vh;
+}
+
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.align-items-stretch > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.align-items-stretch > div > .vehicle-info,
+.align-items-stretch > div > .booking-form,
+.align-items-stretch > div > .payment-details {
+  flex: 1; /* Ensures that children of the flex container grow to fill the space */
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle-info, .booking-form, .payment-details {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  flex-grow: 1; /* Ensures that these containers take up all available space */
+}
+
+.vehicle-info img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.vehicle-info h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.vehicle-info p {
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.booking-form input[type="submit"] {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.payment-details label {
+  font-weight: bold;
+}
+
+.payment-details input[type="text"],
+.payment-details select,
+.payment-details input[type="date"] {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 992px) {
+  .align-items-stretch > div {
+    flex: 1;
+  }
+}
