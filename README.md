@@ -1,6 +1,7 @@
 # ZappRental
  DBMS Project Fall 2023
 
+
 ## Code to Set-up Database in Mysql
 
 Mysql for setting up:
