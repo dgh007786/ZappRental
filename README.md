@@ -1,5 +1,6 @@
-# ZappRental
- DBMS Project Fall 2023
+# ZappRental (DBMS Project Fall 2023)
+
+View Full Report: [ADG_Project_Part2_FinalReport (1).pdf](https://github.com/dgh007786/ZappRental/files/15112267/ADG_Project_Part2_FinalReport.1.pdf)
 
 
 ## Code to Set-up Database in Mysql
